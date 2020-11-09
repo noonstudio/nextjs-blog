@@ -1,10 +1,19 @@
+import { useRouter } from 'next/router'
 import Layout from '../../components/layout'
-import { getAllPostIds, getPostData } from '../../lib/posts'
 import Head from 'next/head'
 import Date from '../../components/date'
 
+import { getAllPostsWithSlug, getPost } from '../../lib/api'
+
 export default function Post({ postData }) {
-  return (
+  
+	const router = useRouter();
+	
+	if(!router.isFallback && !postData?.slug){
+		return <p>hmmm...looks like a error</p>;   
+    }
+	
+	return (
     <Layout>
       <Head>
         <title>{postData.title}</title>
@@ -12,28 +21,34 @@ export default function Post({ postData }) {
       <article>
         <h1>{postData.title}</h1>
         <br />
+        <br />
         {postData.id}
         <br />
         <Date dateString={postData.date} />
         <br />
-        <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
+        <div dangerouslySetInnerHTML={{ __html: postData.content }} />
       </article>
     </Layout>
   )
 }
+
+
 export async function getStaticPaths() {
-  const paths = getAllPostIds()
+  const allPosts = await getAllPostsWithSlug()
+ 
   return {
-    paths,
+    paths: allPosts.edges.map(({node}) => `/posts/${node.slug}`) || [],
     fallback: false
   }
+	
 }
 
 export async function getStaticProps({ params }) {
-  const postData = await getPostData(params.id)
+	
+  const data = await getPost(params.slug)
   return {
     props: {
-      postData
+      postData:data.post
     }
   }
 }
