@@ -4,12 +4,21 @@ const next = require('next');
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
+const bodyParser = require("body-parser");
+
+
 
 app
   .prepare()
   .then(() => {
     const server = express();
 
+	server.get("/hook", (req, res) => {
+	  console.log(req.body, 'test') // Call your action on the request here
+	  res.status(200).end() // Responding is important
+	});	
+	
+	
     server.get('/post/:slug', (req, res) => {
       const actualPage = '/post';
       const queryParams = { slug: req.params.slug, apiRoute: 'post' };
