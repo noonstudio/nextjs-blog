@@ -24,7 +24,7 @@ export default function Post({ post, posts, preview, settings }) {
   return (
     <Layout preview={preview}>
       <Container>
-        <Header title={settings.generalSettingsTitle?.node} />
+        <Header />
         {router.isFallback ? (
           <PostTitle>Loading…</PostTitle>
         ) : (
@@ -47,6 +47,7 @@ export default function Post({ post, posts, preview, settings }) {
                 categories={post.categories}
               />
 			
+				<p>{settings.generalSettingsTitle}</p>
 			
               <PostBody content={post.content} />
               <footer>
