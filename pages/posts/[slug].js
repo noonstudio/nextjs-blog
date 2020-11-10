@@ -28,7 +28,6 @@ export default function Post({ post, posts, preview, settings }) {
           <PostTitle>Loading…</PostTitle>
         ) : (
           <>
-			<Header title={settings.generalSettingsTitle} />
 			
             <article>
 			
@@ -50,6 +49,7 @@ export default function Post({ post, posts, preview, settings }) {
                 categories={post.categories}
               />
 			
+				<p>{settings.generalSettingsTitle}</p>
 			
               <PostBody content={post.content} />
               <footer>
@@ -65,6 +65,9 @@ export default function Post({ post, posts, preview, settings }) {
     </Layout>
   )
 }
+
+
+//			<Header title={settings.generalSettingsTitle} />
 
 export async function getStaticProps({ params, preview = false, previewData }) {
   const data = await getPostAndMorePosts(params.slug, preview, previewData);
