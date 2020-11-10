@@ -7,13 +7,13 @@ import Header from '../../components/header'
 import PostHeader from '../../components/post-header'
 import SectionSeparator from '../../components/section-separator'
 import Layout from '../../components/layout'
-import { getAllPostsWithSlug, getPostAndMorePosts } from '../../lib/api'
+import { getAllPostsWithSlug, getPostAndMorePosts,  getAllSiteSettings} from '../../lib/api'
 import PostTitle from '../../components/post-title'
 import Head from 'next/head'
 import { CMS_NAME } from '../../lib/constants'
 import Tags from '../../components/tags'
 
-export default function Post({ post, posts, preview }) {
+export default function Post({ post, posts, preview, settings }) {
   const router = useRouter()
   const morePosts = posts?.edges
 
@@ -24,7 +24,7 @@ export default function Post({ post, posts, preview }) {
   return (
     <Layout preview={preview}>
       <Container>
-        <Header />
+        <Header title={settings.generalSettingsTitle} />
         {router.isFallback ? (
           <PostTitle>Loading…</PostTitle>
         ) : (
@@ -46,6 +46,8 @@ export default function Post({ post, posts, preview }) {
                 author={post.author?.node}
                 categories={post.categories}
               />
+			
+			
               <PostBody content={post.content} />
               <footer>
                 {post.tags.edges.length > 0 && <Tags tags={post.tags} />}
@@ -63,12 +65,14 @@ export default function Post({ post, posts, preview }) {
 
 export async function getStaticProps({ params, preview = false, previewData }) {
   const data = await getPostAndMorePosts(params.slug, preview, previewData)
-
+  const settings = await getAllSiteSettings()
+  
   return {
     props: {
       preview,
       post: data.post,
       posts: data.posts,
+      settings: settings.allSettings,
     },
 	revalidate: 1
   }
