@@ -24,12 +24,14 @@ export default function Post({ post, posts, preview, settings }) {
   return (
     <Layout preview={preview}>
       <Container>
-        <Header />
         {router.isFallback ? (
           <PostTitle>Loading…</PostTitle>
         ) : (
           <>
+			<Header title={settings.generalSettingsTitle} />
+			
             <article>
+			
               <Head>
                 <title>
                   {post.title} | Next.js Blog Example with {CMS_NAME}
@@ -39,6 +41,7 @@ export default function Post({ post, posts, preview, settings }) {
                   content={post.featuredImage?.node?.sourceUrl}
                 />
               </Head>
+			
               <PostHeader
                 title={post.title}
                 coverImage={post.featuredImage?.node}
