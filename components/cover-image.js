@@ -26,7 +26,8 @@ const image = (
         alt="Picture of the author"
 		layout="fill"
 		className="zoom_animate"
-			 priority = "true"
+		priority = "true"
+        loading = "eager"
 
       />		
 	
