@@ -24,7 +24,7 @@ export default function Post({ post, posts, preview, settings }) {
   return (
     <Layout preview={preview}>
       <Container>
-        <Header title={settings.generalSettingsTitle} />
+        <Header title={settings.generalSettingsTitle?.node} />
         {router.isFallback ? (
           <PostTitle>Loading…</PostTitle>
         ) : (
@@ -64,8 +64,8 @@ export default function Post({ post, posts, preview, settings }) {
 }
 
 export async function getStaticProps({ params, preview = false, previewData }) {
-  const data = await getPostAndMorePosts(params.slug, preview, previewData)
-  const settings = await getAllSiteSettings()
+  const data = await getPostAndMorePosts(params.slug, preview, previewData);
+  const settings = await getAllSiteSettings();
   
   return {
     props: {
