@@ -1,4 +1,4 @@
-article.zoom_animate{
+.zoom_animate{
 	transform: scale(1);
 	position: absolute;
 	object-fit: cover;

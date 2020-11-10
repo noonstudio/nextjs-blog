@@ -1,18 +1,39 @@
 import cn from 'classnames'
 import Link from 'next/link'
+import Image from 'next/image'
 
 import styles from './cover-image.module.css'
 
 
 export default function CoverImage({ title, coverImage, slug }) {
-  const image = (
+  
+const image = (
+
+	<>
+		{slug ? (
+		 
     <img
       src={coverImage?.sourceUrl}
-      className={cn('shadow-small zoom_animate', {
+      className={cn('shadow-small', {
         'hover:shadow-medium transition-shadow duration-200 ': slug,
-      }), styles.zoom_animate }
-    />
+      })}
+    />			 
+		 
+		 ) : ( 
+
+      <Image
+        src={ coverImage.sourceUrl}
+        alt="Picture of the author"
+		layout="fill"
+		className="zoom_animate"
+
+      />		
+	
+	) }
+	</>
+	
   )
+  
   return (
     <div className="sm:mx-0">
       {slug ? (
@@ -20,7 +41,9 @@ export default function CoverImage({ title, coverImage, slug }) {
           <a aria-label={title}>{image}</a>
         </Link>
       ) : (
-        image
+
+		image
+
       )}
     </div>
   )
