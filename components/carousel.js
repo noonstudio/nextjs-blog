@@ -12,8 +12,9 @@ function onScroll() {
 
 function add_tiny(){
 
-  tiny_init = true;	
-
+myStopFunction();
+	
+	
   var slider = tns({
     container: '.what-else-on-offer',
     items: 1,	  
@@ -43,8 +44,21 @@ function add_tiny(){
 	
 }
 
-window.addEventListener('load', add_tiny);
-window.addEventListener("scroll", onScroll );
+
+
+
+
+var myVar = setInterval(myTimer, 1000);
+
+function myTimer() {
+	add_tiny();
+
+}
+
+function myStopFunction() {
+  clearInterval(myVar);
+}
+
 
 export default function Slider( { posts } ) {
 	

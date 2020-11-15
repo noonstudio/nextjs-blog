@@ -64,9 +64,6 @@ export default function Post({ post, posts, preview, settings }) {
               />
 
 			
-	  
-			
-			
               { post.subject_settings.contentOnOffer.length > 0  && <TinySlider posts={post.subject_settings.contentOnOffer} />} 
 					
 				
