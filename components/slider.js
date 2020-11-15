@@ -8,6 +8,8 @@ function onScroll() {
 	}
 }
 
+
+add_tiny();
 function add_tiny(){
 
   tiny_init = true;	

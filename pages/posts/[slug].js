@@ -15,12 +15,6 @@ import Tags from '../../components/tags'
 
 
 import dynamic from 'next/dynamic'
-const Tiny_Slider = dynamic(() => import('../../components/slider'),
-  {
-    ssr: false,
-  },
-)
-
 const TinySlider = dynamic(() => import('../../components/carousel'),
   {
     ssr: false,
