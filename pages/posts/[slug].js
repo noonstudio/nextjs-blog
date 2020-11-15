@@ -13,6 +13,23 @@ import Head from 'next/head'
 import { CMS_NAME } from '../../lib/constants'
 import Tags from '../../components/tags'
 
+
+import dynamic from 'next/dynamic'
+const Tiny_Slider = dynamic(() => import('../../components/slider'),
+  {
+    ssr: false,
+  },
+)
+
+const TinySlider = dynamic(() => import('../../components/carousel'),
+  {
+    ssr: false,
+  },
+)
+
+
+
+
 export default function Post({ post, posts, preview, settings }) {
   const router = useRouter()
   const morePosts = posts?.edges
@@ -20,6 +37,10 @@ export default function Post({ post, posts, preview, settings }) {
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />
   }
+  
+  
+  
+  
 
   return (
     <Layout preview={preview}>
@@ -28,9 +49,7 @@ export default function Post({ post, posts, preview, settings }) {
           <PostTitle>Loading…</PostTitle>
         ) : (
           <>
-			
             <article>
-			
               <Head>
                 <title>
                   {post.title} | Next.js Blog Example with {CMS_NAME}
@@ -39,18 +58,24 @@ export default function Post({ post, posts, preview, settings }) {
                   property="og:image"
                   content={post.featuredImage?.node?.sourceUrl}
                 />
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.css" />
               </Head>
 			
-              <PostHeader
+			  <PostHeader
                 title={post.title}
                 coverImage={post.featuredImage?.node}
                 date={post.date}
                 author={post.author?.node}
                 categories={post.categories}
               />
+
 			
-				<p>{settings.generalSettingsTitle}</p>
+	  
 			
+			
+              { post.subject_settings.contentOnOffer.length > 0  && <TinySlider posts={post.subject_settings.contentOnOffer} />} 
+					
+				
               <PostBody content={post.content} />
               <footer>
                 {post.tags.edges.length > 0 && <Tags tags={post.tags} />}
@@ -73,6 +98,7 @@ export async function getStaticProps({ params, preview = false, previewData }) {
   const data = await getPostAndMorePosts(params.slug, preview, previewData);
   const settings = await getAllSiteSettings();
   
+	
   return {
     props: {
       preview,
