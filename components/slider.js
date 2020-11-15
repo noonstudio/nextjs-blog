@@ -1,19 +1,6 @@
-
-var tiny_init = false;
-function onScroll() {
+var callback = function(){
+  // Handler when the DOM is fully loaded
 	
-	if(!tiny_init){
-		
-		add_tiny();
-	}
-}
-
-
-add_tiny();
-function add_tiny(){
-
-  tiny_init = true;	
-
   var slider = tns({
     container: '.my-slider',
     items: 1,
@@ -31,12 +18,22 @@ function add_tiny(){
         items: 4
       }
     }
-  });	
+  });		
 	
+};
+
+
+if (
+    document.readyState === "complete" ||
+    (document.readyState !== "loading" && !document.documentElement.doScroll)
+) {
+  callback();
+} else {
+  document.addEventListener("DOMContentLoaded", callback);
 }
 
-window.addEventListener('load', add_tiny);
-window.addEventListener("scroll", onScroll );
+
+
 
 export default function Slider( { post } ) {
 	
