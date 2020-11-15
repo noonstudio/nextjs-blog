@@ -44,11 +44,14 @@ function add_tiny(){
 }
 
 window.addEventListener('load', add_tiny);
-//window.addEventListener("scroll", onScroll );
+window.addEventListener("scroll", onScroll );
 
 export default function Slider( { posts } ) {
 	
+	
 
+
+	
   return(
 
 	  <div className="col-full"> 

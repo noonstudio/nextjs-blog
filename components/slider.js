@@ -23,34 +23,29 @@ var callback = function(){
 };
 
 
-if (
-    document.readyState === "complete" ||
-    (document.readyState !== "loading" && !document.documentElement.doScroll)
-) {
-  callback();
-} else {
-  document.addEventListener("DOMContentLoaded", callback);
-}
-
-
-
-
 export default function Slider( { post } ) {
 	
+	componentDidMount () {
+		callback();
+	}
+	
+	render(){
 
-  return(
-	  
-	  
-	  <div className="my-slider"> 
-	  	<div>{ post }</div> 
-	  	<div>{ post }</div> 
-	  	<div>{ post }</div> 
-	  	<div>{ post }</div> 
-	  	<div>{ post }</div> 
-	  	<div>{ post }</div> 
-	  	<div>{ post }</div> 
-	  </div>
-	  
-	  
-	  )
+	  return(
+
+
+		  <div className="my-slider"> 
+			<div>{ post }</div> 
+			<div>{ post }</div> 
+			<div>{ post }</div> 
+			<div>{ post }</div> 
+			<div>{ post }</div> 
+			<div>{ post }</div> 
+			<div>{ post }</div> 
+		  </div>
+
+
+		  )
+		
+	}
 }
