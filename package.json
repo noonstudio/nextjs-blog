@@ -20,7 +20,8 @@
   "devDependencies": {
     "postcss-flexbugs-fixes": "4.2.1",
     "postcss-preset-env": "^6.7.0",
-    "tailwindcss": "^1.4.6"
+    "tailwindcss": "^1.4.6",
+    "tiny-slider-react": "^0.5.3"
   },
   "license": "MIT"
 }

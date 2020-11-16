@@ -21,6 +21,14 @@ const TinySlider = dynamic(() => import('../../components/carousel'),
   },
 )
 
+const ItemGrid = dynamic(() => import('../../components/test_2'),
+  {
+    ssr: false,
+  },
+)
+
+
+
 
 
 
@@ -64,8 +72,8 @@ export default function Post({ post, posts, preview, settings }) {
               />
 
 			
-              { post.subject_settings.contentOnOffer.length > 0  && <TinySlider posts={post.subject_settings.contentOnOffer} />} 
-					
+			  { post.subject_settings.contentOnOffer.length > 0 && <ItemGrid posts={post.subject_settings.contentOnOffer} />}
+							
 				
               <PostBody content={post.content} />
               <footer>
