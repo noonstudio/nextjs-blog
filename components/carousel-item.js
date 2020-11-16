@@ -8,7 +8,6 @@ export default function TinyItem({
   return (
 	 <> 
 	  
-    <div>
       <div className=" inner ">
 	  	<a href="">
           <div className="explore">
@@ -24,7 +23,6 @@ export default function TinyItem({
 		/>			  
 	  
       </div>
-    </div>
 	  
 	  </>
 

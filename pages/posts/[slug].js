@@ -30,8 +30,6 @@ const ItemGrid = dynamic(() => import('../../components/test_2'),
 
 
 
-
-
 export default function Post({ post, posts, preview, settings }) {
   const router = useRouter()
   const morePosts = posts?.edges
